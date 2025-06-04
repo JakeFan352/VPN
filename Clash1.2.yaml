@@ -129,9 +129,6 @@ proxy-groups:
 
 rules:
   - SRC-IP-CIDR,192.168.110.211/32,🏡 JNAS
-  - RULE-SET,apple_domain,DIRECT
-  - RULE-SET,microsoft_domain,DIRECT
-  - RULE-SET,onedrive_domain,DIRECT
   - RULE-SET,whatsApp,🚀 节点选择
   - RULE-SET,ai_domain,🚀 节点选择
   - RULE-SET,google_domain,🚀 节点选择
@@ -146,8 +143,10 @@ rules:
   - RULE-SET,paypal_domain,🚀 节点选择
   - RULE-SET,gfw_domain,🚀 节点选择
   - RULE-SET,geolocation-!cn_domain,🚀 节点选择
+  - RULE-SET,microsoft_domain,🚀 节点选择
+  - RULE-SET,onedrive_domain,🚀 节点选择
   
-
+  - RULE-SET,apple_domain,DIRECT
   - RULE-SET,cn_domain,DIRECT
   - RULE-SET,cn_ip,DIRECT
   - RULE-SET,custom_direct,DIRECT
@@ -315,7 +314,7 @@ rule-providers:
 
   whatsApp:
     type: http
-    url: "https://raw.githubusercontent.com/JakeFan352/VPN/refs/heads/main/whatsApp.yaml?token=GHSAT0AAAAAADEGBSVTPYA3KBQM6QSPTR722CAAPLQ"
+    url: "https://raw.githubusercontent.com/JakeFan352/VPN/refs/heads/main/whatsApp.yaml"
     path: ./whatsApp.yaml
     interval: 86400
     behavior: classical
@@ -323,7 +322,7 @@ rule-providers:
 
   custom_direct:
     type: http
-    url: "https://raw.githubusercontent.com/JakeFan352/VPN/refs/heads/main/custom_direct.yaml?token=GHSAT0AAAAAADEGBSVTPJSBBPSF2IKVE2CE2CAAOAA"
+    url: "https://raw.githubusercontent.com/JakeFan352/VPN/refs/heads/main/custom_direct.yaml"
     path: ./custom_direct.yaml
     interval: 86400
     behavior: classical
