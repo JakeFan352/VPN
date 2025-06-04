@@ -16,7 +16,7 @@ payload:
   - DOMAIN,cs2ob.cn                #cs饰品分析
   - DOMAIN,chat.deepseek.com            #DeepSeek
   - DOMAIN,aiqicha.baidu.com                  #爱企查
-
+  - DOMAIN,xindazbags.com          #xindazbags
 
   - DOMAIN-SUFFIX,oray.com        #向日葵
   - DOMAIN-SUFFIX,orayimg.com        #向日葵
