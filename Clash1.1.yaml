@@ -130,8 +130,8 @@ proxy-groups:
 rules:
   - SRC-IP-CIDR,192.168.110.211/32,🏡 JNAS
   - RULE-SET,apple_domain,DIRECT
-  - RULE-SET,microsoft_domain,🚀 节点选择
-  - RULE-SET,onedrive_domain,🚀 节点选择
+  - RULE-SET,microsoft_domain,DIRECT
+  - RULE-SET,onedrive_domain,DIRECT
   - RULE-SET,whatsApp,🚀 节点选择
   - RULE-SET,ai_domain,🚀 节点选择
   - RULE-SET,google_domain,🚀 节点选择
