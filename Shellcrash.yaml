@@ -10,7 +10,7 @@ proxy-providers:
       enable: true
       url: https://www.google.com/generate_204
       interval: 300    
-   override:
+    override:
       udp: true
       down: "50 Mbps"
       up: "10 Mbps"
