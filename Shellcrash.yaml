@@ -1,3 +1,4 @@
+# 机场订阅
 proxy-providers:
   tannel:
     type: http
@@ -10,38 +11,77 @@ proxy-providers:
       enable: true
       url: https://www.google.com/generate_204
       interval: 300    
+   override:
+      udp: true
+      down: "50 Mbps"
+      up: "10 Mbps"
+      skip-cert-verify: true
       
-#全局配置
+# 全局配置
 port: 7890
 socks-port: 7891
-allow-lan: true    #允许局域网
-bind-address: "*"    #绑定地址，仅允许其他设备通过这个地址访问
+redir-port: 7892
+mixed-port: 7893
+tproxy-port: 7894
+allow-lan: true    # 允许局域网
+bind-address: "*"    # 绑定地址，仅允许其他设备通过这个地址访问
 mode: Rule
 log-level: info
 ipv6: false
-unified-delay: true    #统一延迟
-tcp-concurrent: true    #tcp并发
-global-client-fingerprint: chrome    #伪装指纹
-#移动设备省电
+unified-delay: true    # 统一延迟
+tcp-concurrent: true    # tcp并发
+find-process-mode: off    # 控制是否让 Clash 去匹配进程
+global-client-fingerprint: chrome    # 伪装指纹
+# 移动设备省电
 keep-alive-idle: 600
 keep-alive-interval: 15
 disable-keep-alive: false
 profile:
   store-selected: true    # 储存 API 对策略组的选择，以供下次启动时使用
   store-fake-ip: true    # 储存 fakeip 映射表，域名再次发生连接时，使用原有映射地址
-  
-external-controller: :9090    #API控制面板
 
+# 数据库
+geo-auto-update: false # 是否自动更新 geodata
+geo-update-interval: 24 # 更新间隔，单位：小时
+geox-url:
+  geoip: "https://github.xgithub.fun/https://github.com/MetaCubeX/meta-rules-dat/releases/download/latest/geoip-lite.dat"
+  geosite: "https://github.xgithub.fun/https://github.com/MetaCubeX/meta-rules-dat/releases/download/latest/geosite.dat"
+  mmdb: "https://github.xgithub.fun/https://github.com/MetaCubeX/meta-rules-dat/releases/download/latest/country-lite.mmdb"
+  asn: "https://github.xgithub.fun/https://github.com/MetaCubeX/meta-rules-dat/releases/download/latest/GeoLite2-ASN.mmdb"
+
+# 控制面板  
+external-controller: 0.0.0.0:9090    # API控制面板
+secret: ""
+
+# 嗅探
+sniffer:
+  enable: true
+  sniff:
+    HTTP:
+      ports: [80, 8080-8880]
+      override-destination: true
+    TLS:
+      ports: [443, 8443]
+    QUIC:
+      ports: [443, 8443]
+  force-domain:
+    - "+.v2ex.com"
+  skip-domain:
+    - "+.baidu.com"
 
 # 入站  
 tun:
   enable: true
   # system/gvisor/mixed
   stack: mixed
-  dns-hijack: ["any:53", "tcp://any:53"]
+  dns-hijack:
+    - any:53
+    - tcp://any:53
   auto-route: true
   auto-redirect: true
   auto-detect-interface: true
+  route-exclude-address-set:
+    - "rule-set:cn_ip"
   
 # DNS模块
 dns:
@@ -53,23 +93,36 @@ dns:
   fake-ip-range: 28.0.0.1/8
   fake-ip-filter-mode: blacklist
   fake-ip-filter:
+    - "rule-set:private_domain,cn_domain"
+    - "+.services.googleapis.cn"
+    - "+.pool.ntp.org"
+    - "+.ntp.tencent.com"
+    - "+.ntp1.aliyun.com"
+    - "+.ntp.ntsc.ac.cn"
+    - "+.cn.ntp.org.cn"
     - "+.msftconnecttest.com"
     - "+.msftncsi.com"
     - "time.*.com"
   default-nameserver:
     - 223.5.5.5
+    - 119.29.29.29
+  direct-nameserver:  # 用于 direct 出口域名解析的 DNS 服务器
+    - 223.5.5.5
+  direct-nameserver-follow-policy: false
   proxy-server-nameserver:
     - https://223.5.5.5/dns-query
   # namesever尽量用运营商提供的DNS
   nameserver:
     - 223.5.5.5
     - 119.29.29.29
+  fallback:
+    - https://1.1.1.1/dns-query
+    - tls://dns.rubyfish.cn:853
 
-
-#自建节点添加到这里
+# 自建节点添加到这里
 proxies: 
 
-#策略组
+# 策略组
 proxy-groups:
   - name: 🚀 节点选择
     type: select
@@ -156,39 +209,37 @@ proxy-groups:
 
 rules:
   - SRC-IP-CIDR,192.168.110.211/32,🏡 JNAS
-  - RULE-SET,private_domain,DIRECT
+  - RULE-SET,private_domain,DIRECT,no-resolve
   - RULE-SET,custom_ad,🛑 广告拦截
-  - RULE-SET,whatsApp,🚀 节点选择
+  - RULE-SET,custom_direct,DIRECT
   - RULE-SET,custom_HK,🇭🇰 香港自动
   - RULE-SET,custom_US,🇺🇲 美国自动
+  - RULE-SET,whatsApp,🚀 节点选择
   - RULE-SET,ai_domain,🤖 AI
   - RULE-SET,google_domain,🚀 节点选择
-  - RULE-SET,google_ip,🚀 节点选择,no-resolve  
   - RULE-SET,youtube_domain,🚀 节点选择
   - RULE-SET,github_domain,🚀 节点选择  
   - RULE-SET,tiktok_domain,🇺🇲 美国自动
   - RULE-SET,telegram_domain,🚀 节点选择
-  - RULE-SET,telegram_ip,🚀 节点选择,no-resolve  
   - RULE-SET,netflix_domain,🇺🇲 美国自动
-  - RULE-SET,netflix_ip,🇺🇲 美国自动,no-resolve  
   - RULE-SET,paypal_domain,🚀 节点选择
   - RULE-SET,gfw_domain,🚀 节点选择
   - RULE-SET,geolocation-!cn_domain,🚀 节点选择
   - RULE-SET,microsoft_domain,🪟 Microsoft
   - RULE-SET,onedrive_domain,🪟 Microsoft
   - RULE-SET,apple_domain,🍎 Apple
-  
+  - RULE-SET,google_ip,🚀 节点选择,no-resolve
+  - RULE-SET,telegram_ip,🚀 节点选择,no-resolve
+  - RULE-SET,netflix_ip,🇺🇲 美国自动,no-resolve
   - RULE-SET,cn_domain,DIRECT
-  - RULE-SET,cn_ip,DIRECT
-  - RULE-SET,custom_direct,DIRECT
   - RULE-SET,speedtest_domain,DIRECT
-
+  - RULE-SET,cn_ip,DIRECT,no-resolve
   - MATCH,🐟 漏网之鱼
 
-#规则集
+# 规则集
 rule-providers:
 
-#域名集
+# 域名集
   private_domain:
     type: http
     url: "https://github.xgithub.fun/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/private.yaml"
@@ -333,7 +384,7 @@ rule-providers:
     format: yaml
     proxy: DIRECT
 
-#ip集
+# ip集
   google_ip:
     type: http
     url: "https://github.xgithub.fun/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/google.yaml"
@@ -370,7 +421,7 @@ rule-providers:
     format: yaml
     proxy: DIRECT
 
-#自定义集classical,yaml
+# 自定义集classical,yaml
 
   whatsApp:
     type: http
