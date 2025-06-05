@@ -157,6 +157,7 @@ proxy-groups:
 rules:
   - SRC-IP-CIDR,192.168.110.211/32,🏡 JNAS
   - RULE-SET,private_domain,DIRECT
+  - RULE-SET,custom_ad,🛑 广告拦截
   - RULE-SET,whatsApp,🚀 节点选择
   - RULE-SET,custom_HK,🇭🇰 香港自动
   - RULE-SET,custom_US,🇺🇲 美国自动
@@ -182,7 +183,6 @@ rules:
   - RULE-SET,custom_direct,DIRECT
   - RULE-SET,speedtest_domain,DIRECT
 
-  - RULE-SET,custom_ad,🛑 广告拦截
   - MATCH,🐟 漏网之鱼
 
 #规则集
@@ -413,6 +413,6 @@ rule-providers:
     url: "https://github.xgithub.fun/https://raw.githubusercontent.com/JakeFan352/VPN/refs/heads/main/custom_ad.yaml"
     path: ./custom_ad.yaml
     interval: 86400
-    behavior: classical
+    behavior: domain
     format: yaml
     proxy: DIRECT
