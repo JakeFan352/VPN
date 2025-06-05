@@ -150,6 +150,7 @@ proxy-groups:
 
 rules:
   - SRC-IP-CIDR,192.168.110.211/32,🏡 JNAS
+  - RULE-SET,private_domain,DIRECT
   - RULE-SET,whatsApp,🚀 节点选择
   - RULE-SET,custom_HK,🇭🇰 香港自动
   - RULE-SET,custom_US,🇺🇲 美国自动
@@ -182,6 +183,15 @@ rules:
 rule-providers:
 
 #域名集
+  private_domain:
+    type: http
+    url: "https://github.xgithub.fun/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/private.yaml"
+    path: ./private_domain.yaml
+    interval: 86400
+    behavior: domain
+    format: yaml
+    proxy: DIRECT
+
   apple_domain:
     type: http
     url: "https://github.xgithub.fun/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/apple-cn.yaml"
