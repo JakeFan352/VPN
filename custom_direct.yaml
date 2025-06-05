@@ -17,7 +17,6 @@ payload:
   - DOMAIN,chat.deepseek.com            #DeepSeek
   - DOMAIN,aiqicha.baidu.com                  #爱企查
   - DOMAIN,dl.keke10.com            #可可影视
-  - DOMAIN,xindazbags.com          #xindazbags
 
   - DOMAIN-SUFFIX,oray.com        #向日葵
   - DOMAIN-SUFFIX,orayimg.com        #向日葵
