@@ -214,7 +214,6 @@ rules:
   - RULE-SET,LocalAreaNetwork,DIRECT
   - RULE-SET,UnBan,DIRECT
   - RULE-SET,ChinaDomain,DIRECT
-  - RULE-SET,ChinaMedia,DIRECT
   - RULE-SET,BanAD,🛑 广告拦截
   - RULE-SET,BanProgramAD,🛑 广告拦截
   - RULE-SET,ChinaCompanyIp,DIRECT
@@ -271,14 +270,6 @@ rule-providers:
   ChinaDomain:
     type: http
     url: "https://github.xgithub.fun/https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/ChinaDomain.list"
-    interval: 86400
-    behavior: classical
-    format: text
-    proxy: DIRECT
-
-  ChinaMedia:
-    type: http
-    url: "https://github.xgithub.fun/https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/ChinaMedia.list"
     interval: 86400
     behavior: classical
     format: text
