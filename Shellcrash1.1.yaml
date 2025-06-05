@@ -124,11 +124,36 @@ proxy-groups:
       - DIRECT    
       - 🚀 节点选择
 
+  - name: 🤖 AI
+    type: select
+    proxies:
+      - 🇭🇰 香港自动
+      - 🇺🇲 美国自动
+      - 🌍 其他节点
+      - DIRECT
+
+  - name: 🍎 Apple
+    type: select
+    proxies:
+      - 🇭🇰 香港自动
+      - 🇺🇲 美国自动
+      - 🌍 其他节点
+      - DIRECT
+
+  - name: 🪟 Microsoft
+    type: select
+    proxies:
+      - 🇭🇰 香港自动
+      - 🇺🇲 美国自动
+      - 🌍 其他节点
+      - DIRECT
 
 rules:
   - SRC-IP-CIDR,192.168.110.211/32,🏡 JNAS
   - RULE-SET,whatsApp,🚀 节点选择
-  - RULE-SET,ai_domain,🚀 节点选择
+  - RULE-SET,custom_HK,🇭🇰 香港自动
+  - RULE-SET,custom_US,🇺🇲 美国自动
+  - RULE-SET,ai_domain,🤖 AI
   - RULE-SET,google_domain,🚀 节点选择
   - RULE-SET,google_ip,🚀 节点选择,no-resolve  
   - RULE-SET,youtube_domain,🚀 节点选择
@@ -141,14 +166,16 @@ rules:
   - RULE-SET,paypal_domain,🚀 节点选择
   - RULE-SET,gfw_domain,🚀 节点选择
   - RULE-SET,geolocation-!cn_domain,🚀 节点选择
-  - RULE-SET,microsoft_domain,🚀 节点选择
-  - RULE-SET,onedrive_domain,🚀 节点选择
+  - RULE-SET,microsoft_domain,🪟 Microsoft
+  - RULE-SET,onedrive_domain,🪟 Microsoft
+  - RULE-SET,apple_domain,🍎 Apple
   
-  - RULE-SET,apple_domain,DIRECT
   - RULE-SET,cn_domain,DIRECT
   - RULE-SET,cn_ip,DIRECT
   - RULE-SET,custom_direct,DIRECT
-  - RULE-SET,speedtest_domain,DIRECT  
+  - RULE-SET,speedtest_domain,DIRECT
+
+  - RULE-SET,custom_ad,REJECT
   - MATCH,🐟 漏网之鱼
 
 #规则集
@@ -342,6 +369,33 @@ rule-providers:
     type: http
     url: "https://github.xgithub.fun/https://raw.githubusercontent.com/JakeFan352/VPN/refs/heads/main/custom_direct.yaml"
     path: ./custom_direct.yaml
+    interval: 86400
+    behavior: classical
+    format: yaml
+    proxy: DIRECT
+
+  custom_HK:
+    type: http
+    url: "https://github.xgithub.fun/https://raw.githubusercontent.com/JakeFan352/VPN/refs/heads/main/custom_HK.yaml"
+    path: ./custom_HK.yaml
+    interval: 86400
+    behavior: classical
+    format: yaml
+    proxy: DIRECT
+
+  custom_US:
+    type: http
+    url: "https://github.xgithub.fun/https://raw.githubusercontent.com/JakeFan352/VPN/refs/heads/main/custom_US.yaml"
+    path: ./custom_US.yaml
+    interval: 86400
+    behavior: classical
+    format: yaml
+    proxy: DIRECT
+
+  custom_ad:
+    type: http
+    url: "https://github.xgithub.fun/https://raw.githubusercontent.com/JakeFan352/VPN/refs/heads/main/custom_ad.yaml"
+    path: ./custom_ad.yaml
     interval: 86400
     behavior: classical
     format: yaml
