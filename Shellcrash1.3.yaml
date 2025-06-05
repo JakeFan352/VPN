@@ -148,6 +148,12 @@ proxy-groups:
       - 🌍 其他节点
       - DIRECT
 
+  - name: 🛑 广告拦截
+    type: select
+    proxies:
+      - REJECT
+      - DIRECT
+
 rules:
   - SRC-IP-CIDR,192.168.110.211/32,🏡 JNAS
   - RULE-SET,private_domain,DIRECT
@@ -176,7 +182,7 @@ rules:
   - RULE-SET,custom_direct,DIRECT
   - RULE-SET,speedtest_domain,DIRECT
 
-  - RULE-SET,custom_ad,REJECT
+  - RULE-SET,custom_ad,🛑 广告拦截
   - MATCH,🐟 漏网之鱼
 
 #规则集
