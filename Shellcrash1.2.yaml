@@ -208,7 +208,10 @@ proxy-groups:
 
 rules:
   - SRC-IP-CIDR,192.168.110.211/32,🏡 JNAS
-  - RULE-SET,private_domain,DIRECT,no-resolve
+  - DOMAIN-SUFFIX,xn--ngstr-lra8j.com,🚀 节点选择
+  - DOMAIN-SUFFIX,services.googleapis.cn,🚀 节点选择
+  - RULE-SET,GoogleCNProxyIP,🚀 节点选择
+  - RULE-SET,LocalAreaNetwork,DIRECT
   - RULE-SET,custom_ad,🛑 广告拦截
   - RULE-SET,custom_direct,DIRECT
   - RULE-SET,custom_HK,🇭🇰 香港自动
@@ -239,13 +242,22 @@ rules:
 rule-providers:
 
 # 域名集
-  private_domain:
+  GoogleCNProxyIP:
     type: http
-    url: "https://github.xgithub.fun/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/private.yaml"
-    path: ./private_domain.yaml
+    url: "https://github.xgithub.fun/https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/GoogleCNProxyIP.list"
+    path: ./GoogleCNProxyIP.list
     interval: 86400
-    behavior: domain
-    format: yaml
+    behavior: classical
+    format: text
+    proxy: DIRECT
+
+  LocalAreaNetwork:
+    type: http
+    url: "https://github.xgithub.fun/https://raw.githubusercontent.com/JakeFan352/VPN/refs/heads/main/LocalAreaNetwork.list"
+    path: ./LocalAreaNetwork.list
+    interval: 86400
+    behavior: classical
+    format: text
     proxy: DIRECT
 
   apple_domain:
