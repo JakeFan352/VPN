@@ -10,11 +10,7 @@ proxy-providers:
       enable: true
       url: https://www.google.com/generate_204
       interval: 300    
-    override:
-      udp: true
-      down: "50 Mbps"
-      up: "10 Mbps"
-      skip-cert-verify: true
+
       
 # 全局配置
 port: 7890
@@ -39,60 +35,10 @@ profile:
   store-selected: true    # 储存 API 对策略组的选择，以供下次启动时使用
   store-fake-ip: true    # 储存 fakeip 映射表，域名再次发生连接时，使用原有映射地址
 
-# 数据库
-geo-auto-update: false # 是否自动更新 geodata
-geo-update-interval: 24 # 更新间隔，单位：小时
-geox-url:
-  geoip: "https://github.xgithub.fun/https://github.com/MetaCubeX/meta-rules-dat/releases/download/latest/geoip-lite.dat"
-  geosite: "https://github.xgithub.fun/https://github.com/MetaCubeX/meta-rules-dat/releases/download/latest/geosite.dat"
-#  mmdb: "https://github.xgithub.fun/https://github.com/MetaCubeX/meta-rules-dat/releases/download/latest/country-lite.mmdb"
-#  asn: "https://github.xgithub.fun/https://github.com/MetaCubeX/meta-rules-dat/releases/download/latest/GeoLite2-ASN.mmdb"
-
 # 控制面板  
 external-controller: 0.0.0.0:9090    # API控制面板
 secret: ""
 
-# 嗅探
-sniffer:
-  enable: true
-  sniff:
-    HTTP:
-      ports: [80, 8080-8880]
-      override-destination: true
-    TLS:
-      ports: [443, 8443]
-    QUIC:
-      ports: [443, 8443]
-  force-domain:
-    - "+.v2ex.com"
-  skip-domain:
-    - "+.baidu.com"
-
-# 入站  
-tun:
-  enable: true
-  # system/gvisor/mixed
-  stack: mixed
-  dns-hijack:
-    - any:53
-    - tcp://any:53
-  auto-route: true
-  auto-redirect: true
-  auto-detect-interface: true
-  route-exclude-address-set:
-    - "rule-set:cn_ip"
-  
-# DNS模块
-dns:
-  enable: true
-  nameserver:
-    - 119.29.29.29
-    - 223.5.5.5
-  fallback:
-    - 8.8.8.8
-    - 8.8.4.4
-    - tls://1.0.0.1:853
-    - tls://dns.google:853
 
 # 自建节点添加到这里
 proxies: 
