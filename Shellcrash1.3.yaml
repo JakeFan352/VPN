@@ -1,7 +1,7 @@
 proxy-providers:
   tannel:
     type: http
-    url: "https://psub.xpsub.fun/sub?target=clash&url=https%3A%2F%2FV5ndNjAOgE.qinyues4.cc%2F940cbc7f502f90cd4f74bebdeb521090&insert=false"
+    url: "https://psub.xpsub.fun/sub?target=clash&url=https%3A%2F%2FAhngt2qcyM.qinyues4.cc%2F513ef77981c9f88316ab9cdb811f7b87&insert=false"
     interval: 86400
     path: ./tannel.yaml
     exclude-filter: "北京时间|剩余流量|过期时间|网站地址"
